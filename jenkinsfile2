@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mrscharlotte/teste-em-ci-.git'
+                bat 'npm install'
+            }
+        }
+
+        stage('teste') {
+            steps {
+                bat '''
+                set NO_COLOR=1
+                npm test
+                '''
+            }
+        }
+    }
+}
+
